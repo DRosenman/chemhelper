@@ -1,0 +1,38 @@
+site_name: chemhelper
+site_description: Solve introductory chemistry problems, with step-by-step solutions.
+site_url: https://drosenman.github.io/chemhelper/
+repo_url: https://github.com/drosenman/chemhelper
+theme:
+  name: material
+  features: [navigation.sections, content.code.copy]
+  palette:
+    - scheme: default
+      toggle: {icon: material/brightness-7, name: Dark mode}
+    - scheme: slate
+      toggle: {icon: material/brightness-4, name: Light mode}
+nav:
+  - Home: index.md
+  - Getting started: getting-started.md
+  - Worked examples: examples.md
+  - API reference:
+      - elements: reference/elements.md
+      - compounds: reference/compounds.md
+      - conversions: reference/conversions.md
+      - ideal_gas: reference/ideal_gas.md
+  - Changelog: changelog.md
+plugins:
+  - search
+  - mkdocstrings:
+      handlers:
+        python:
+          paths: [src]
+          options:
+            docstring_style: numpy
+            show_source: false
+            members_order: source
+            show_root_heading: true
+markdown_extensions:
+  - admonition
+  - pymdownx.superfences
+  - pymdownx.snippets
+  - toc: {permalink: true}
