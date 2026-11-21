@@ -77,4 +77,14 @@ def test_steps_functions_print(capsys):
     conversions.molarity_to_grams_steps(0.5, 2, "NaCl")
     ideal_gas.ideal_gas_steps("T", P=760, Punits="torr", V=22430, Vunits="mL", n=1)
     out = capsys.readouterr().out
-    assert "Mass H2O" in out and "1.00 M" in out and "K" in out
+    assert "Mass H2O" in out and "= 1 M" in out and "K" in out
+
+
+def test_steps_show_small_amounts(capsys):
+    conversions.molarity_to_moles_steps(0.150, 0.0250)
+    conversions.molarity_to_grams_steps(0.100, 0.250, "NaOH")
+    conversions.molarity_steps(0.5, mass=25.0, chemical="NH4NO3")
+    out = capsys.readouterr().out
+    assert "0.15 moles/L x 0.025 L = 0.00375 moles" in out
+    assert "0.025 moles x 40.00 grams/mole = 1.00 grams" in out
+    assert "0.3123 moles/0.5 L = 0.6246 M" in out

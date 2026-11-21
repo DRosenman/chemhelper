@@ -13,6 +13,10 @@
   or `TypeError`.
 
 ### Added
+- A full documentation site: getting started, a guide to every function,
+  tutorials, a cookbook, a periodic table page, FAQ and migration notes.
+- `tools/docs_examples.py`, which runs every example in the docs and README
+  and checks its output.
 - Formulas with parentheses and brackets: `Ca(OH)2`, `Al2(SO4)3`, `K4[Fe(CN)6]`.
 - `compounds.parse_formula`.
 - `ideal_gas`: pressure in `mmHg` and `kPa`; the `decimals` argument now works.
@@ -21,11 +25,14 @@
 - Test suite and CI.
 
 ### Fixed
+- Printed solutions show moles, volumes and molarities to four significant
+  figures, so small amounts no longer appear as `0.00`.
 - Technetium's symbol (`'TC'` → `'Tc'`).
 - Spelling of Beryllium, Holmium and Protactinium.
 - `ideal_gas_steps` printed a wrongly rounded torr→atm value.
 
 ### Packaging
+- Requires Python 3.10 or newer.
 - `pyproject.toml` with a `src/` layout replaces `setup.py`. The previous
   layout shipped no code because `chemhelper/` did not exist in the repository.
 - Old per-version folders (`chemhelper.0.1` … `chemhelper.0.4`) removed; they

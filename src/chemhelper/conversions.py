@@ -3,6 +3,11 @@
 from chemhelper import compounds
 
 
+def _fmt(value):
+    """Format a quantity for a printed solution, to 4 significant figures."""
+    return "{:.4g}".format(value)
+
+
 def grams_to_moles(mass, chemical):
     """Convert a mass of a substance to moles.
 
@@ -80,8 +85,8 @@ def moles_to_grams_steps(moles, chemical):
         Chemical formula of the substance.
     """
     compounds.mass_steps(chemical)
-    print("{:.2f} moles x {:.2f} grams/mole = {:.2f} grams".format(
-        moles, compounds.mass(chemical), moles_to_grams(moles, chemical)))
+    print("{} moles x {:.2f} grams/mole = {:.2f} grams".format(
+        _fmt(moles), compounds.mass(chemical), moles_to_grams(moles, chemical)))
 
 
 def molarity(volume, mass=None, chemical=None, moles=None):
@@ -129,12 +134,12 @@ def molarity_steps(volume, mass=None, chemical=None, moles=None):
 
     Takes the same arguments as :func:`molarity`.
     """
-    if moles is None:
-        grams_to_moles_steps(mass, chemical)
     M = molarity(volume, mass, chemical, moles)
     if moles is None:
         moles = mass / compounds.mass(chemical)
-    print("{:.2f} moles/{:.2f} L = {:.2f} M".format(moles, volume, M))
+        print("{}g {} x 1 mole {}/{}g {} = {} moles {}".format(
+            mass, chemical, chemical, compounds.mass(chemical), chemical, _fmt(moles), chemical))
+    print("{} moles/{} L = {} M".format(_fmt(moles), _fmt(volume), _fmt(M)))
 
 
 def molarity_to_moles(M, volume):
@@ -165,7 +170,7 @@ def molarity_to_moles_steps(M, volume):
 
     Takes the same arguments as :func:`molarity_to_moles`.
     """
-    print("{:.2f} moles/L x {:.2f} L = {:.2f} moles".format(M, volume, molarity_to_moles(M, volume)))
+    print("{} moles/L x {} L = {} moles".format(_fmt(M), _fmt(volume), _fmt(molarity_to_moles(M, volume))))
 
 
 def molarity_to_grams(molarity, volume, chemical):

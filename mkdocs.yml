@@ -1,25 +1,89 @@
 site_name: chemhelper
-site_description: Solve introductory chemistry problems, with step-by-step solutions.
+site_description: General chemistry answers in one line of Python, and the worked solution in one more.
+site_author: Dave Rosenman
 site_url: https://drosenman.github.io/chemhelper/
 repo_url: https://github.com/drosenman/chemhelper
+repo_name: drosenman/chemhelper
+edit_uri: edit/master/docs/
+copyright: Copyright &copy; 2017&ndash;2026 Dave Rosenman. Released under the MIT License.
+
 theme:
   name: material
-  features: [navigation.sections, content.code.copy]
+  icon:
+    logo: material/flask
+    repo: fontawesome/brands/github
+  favicon: assets/favicon.svg
+  font:
+    text: Inter
+    code: JetBrains Mono
+  features:
+    - navigation.tabs
+    - navigation.tabs.sticky
+    - navigation.sections
+    - navigation.indexes
+    - navigation.top
+    - navigation.footer
+    - navigation.instant
+    - navigation.tracking
+    - toc.follow
+    - search.suggest
+    - search.highlight
+    - content.code.copy
+    - content.tabs.link
+    - content.action.edit
   palette:
-    - scheme: default
-      toggle: {icon: material/brightness-7, name: Dark mode}
-    - scheme: slate
-      toggle: {icon: material/brightness-4, name: Light mode}
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: teal
+      accent: deep orange
+      toggle:
+        icon: material/weather-night
+        name: Switch to dark mode
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: teal
+      accent: deep orange
+      toggle:
+        icon: material/weather-sunny
+        name: Switch to light mode
+
 nav:
   - Home: index.md
-  - Getting started: getting-started.md
-  - Worked examples: examples.md
+  - Getting started:
+      - Installation: getting-started/installation.md
+      - Quickstart: getting-started/quickstart.md
+      - Writing formulas: getting-started/formulas.md
+      - Answers and worked solutions: getting-started/steps.md
+      - Units and rounding: getting-started/units-and-rounding.md
+  - User guide:
+      - guide/index.md
+      - elements: guide/elements.md
+      - compounds: guide/compounds.md
+      - conversions: guide/conversions.md
+      - ideal_gas: guide/ideal-gas.md
+      - Periodic table: periodic-table.md
+  - Tutorials:
+      - tutorials/index.md
+      - A tutoring session: tutorials/tutoring-session.md
+      - Preparing solutions: tutorials/solutions.md
+      - Gas law problems: tutorials/gases.md
+  - Cookbook: cookbook.md
   - API reference:
-      - elements: reference/elements.md
-      - compounds: reference/compounds.md
-      - conversions: reference/conversions.md
-      - ideal_gas: reference/ideal_gas.md
-  - Changelog: changelog.md
+      - chemhelper.elements: reference/elements.md
+      - chemhelper.compounds: reference/compounds.md
+      - chemhelper.conversions: reference/conversions.md
+      - chemhelper.ideal_gas: reference/ideal_gas.md
+  - Project:
+      - FAQ and troubleshooting: project/faq.md
+      - Migrating from 0.4: project/migrating.md
+      - Roadmap: project/roadmap.md
+      - Contributing: project/contributing.md
+      - Changelog: project/changelog.md
+
+validation:
+  links:
+    anchors: warn
+
 plugins:
   - search
   - mkdocstrings:
@@ -28,11 +92,51 @@ plugins:
           paths: [src]
           options:
             docstring_style: numpy
-            show_source: false
+            show_source: true
             members_order: source
             show_root_heading: true
+            show_root_full_path: true
+            heading_level: 2
+            show_signature_annotations: false
+            separate_signature: true
+            docstring_section_style: table
+
 markdown_extensions:
   - admonition
-  - pymdownx.superfences
+  - attr_list
+  - md_in_html
+  - tables
+  - def_list
+  - pymdownx.details
   - pymdownx.snippets
-  - toc: {permalink: true}
+  - pymdownx.highlight:
+      anchor_linenums: true
+  - pymdownx.inlinehilite
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
+  - pymdownx.tabbed:
+      alternate_style: true
+  - pymdownx.arithmatex:
+      generic: true
+  - pymdownx.emoji:
+      emoji_index: !!python/name:material.extensions.emoji.twemoji
+      emoji_generator: !!python/name:material.extensions.emoji.to_svg
+  - toc:
+      permalink: true
+
+extra_css:
+  - stylesheets/extra.css
+
+extra_javascript:
+  - javascripts/mathjax.js
+  - https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
+
+extra:
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/drosenman/chemhelper
+    - icon: fontawesome/brands/python
+      link: https://pypi.org/project/chemhelper/

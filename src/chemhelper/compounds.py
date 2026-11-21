@@ -205,5 +205,5 @@ def percent_composition_steps(chemical):
     percents = percent_composition(chemical)
     total = mass(chemical)
     for sym, el_mass in _element_masses(chemical).items():
-        print("{}: 100 x {:.2f}g {}/{:.2f}g {} = {:.2f}%".format(
-            sym, el_mass, sym, total, chemical, percents[sym]))
+        print("{}: 100 x {}g {}/{}g {} = {:.2f}%".format(
+            sym, round(el_mass, 4), sym, total, chemical, percents[sym]))

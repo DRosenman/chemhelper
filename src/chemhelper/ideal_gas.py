@@ -25,7 +25,7 @@ def _prepare(solve_for, substance, P, V, n, T, m, Tunits, Vunits, Punits, show):
             raise ValueError("substance is required when giving the mass m")
         n = m / compounds.mass(substance)
         if show:
-            print("n = {}g x 1 mole {}/{}g {} = {:.4g} moles {}".format(
+            print("n = {}g x 1 mole {}/{}g {} = {:.6g} moles {}".format(
                 m, substance, compounds.mass(substance), substance, n, substance))
 
     known = {"P": P, "V": V, "n": n, "T": T}
@@ -36,12 +36,12 @@ def _prepare(solve_for, substance, P, V, n, T, m, Tunits, Vunits, Punits, show):
     if solve_for != "P" and Punits != "atm":
         atm = P * _P_TO_ATM[Punits]
         if show:
-            print("P = {} {} = {:.4g} atm".format(P, Punits, atm))
+            print("P = {} {} = {:.6g} atm".format(P, Punits, atm))
         P = atm
     if solve_for != "V" and Vunits != "L":
         liters = V * _V_TO_L[Vunits]
         if show:
-            print("V = {} {} x 1 L/1000 mL = {:.4g} L".format(V, Vunits, liters))
+            print("V = {} {} x 1 L/1000 mL = {:.6g} L".format(V, Vunits, liters))
         V = liters
     if solve_for != "T" and Tunits == "C":
         kelvin = T + 273.15

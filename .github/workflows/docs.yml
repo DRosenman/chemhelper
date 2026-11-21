@@ -10,6 +10,9 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
-        with: {python-version: "3.12"}
+        with:
+          python-version: "3.13"
       - run: pip install -e ".[docs]"
-      - run: mkdocs gh-deploy --force
+      - name: Check that every example in the docs is up to date
+        run: python tools/docs_examples.py
+      - run: mkdocs gh-deploy --force --strict
